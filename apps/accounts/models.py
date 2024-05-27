@@ -67,7 +67,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=True,
     )
     bio = models.TextField(_("bio"))
-    avatar = models.ImageField(_("profile picture"), upload_to="images")
+    avatar = models.ImageField(
+        _("profile picture"),
+        upload_to="images",
+        null=True,
+        blank=True,
+    )
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
 
