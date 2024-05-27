@@ -68,7 +68,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     bio = models.TextField(_("bio"))
     avatar = models.ImageField(_("profile picture"), upload_to="images")
-    create_at = models.DateTimeField(_("created at"), auto_now_add=True)
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
 
     objects = CustomUserManager()
