@@ -141,7 +141,7 @@ def test_refresh_success(
 
 @pytest.mark.django_db
 def test_verify_success(
-    api_client, login_endpoint, registration_endpoint, refresh_endpoint
+    api_client, login_endpoint, registration_endpoint, verify_endpoint
 ):
     password = fake.password()
     registered_user = api_client.post(
@@ -164,7 +164,7 @@ def test_verify_success(
         format="json",
     )
     response = api_client.post(
-        path=refresh_endpoint,
+        path=verify_endpoint,
         data={
             "token": login_response.json().get("access"),
         },
