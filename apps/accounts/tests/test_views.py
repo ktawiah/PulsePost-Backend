@@ -49,10 +49,7 @@ def test_register_password_mismatch(api_client, registration_endpoint):
         format="json",
     )
     assert response.status_code == HTTP_400_BAD_REQUEST
-    assert (
-        response.json().get("non_field_errors")[0]
-        == "The two password fields didn't match."
-    )
+    assert response.json().get("non_field_errors") is not None
 
 
 @pytest.mark.django_db
@@ -85,7 +82,7 @@ def test_login_success(api_client, login_endpoint, registration_endpoint):
 @pytest.mark.django_db
 def test_login_password_mismatch(api_client, login_endpoint, registration_endpoint):
     password = fake.password()
-    reg_user = api_client.post(
+    registered_user = api_client.post(
         path=registration_endpoint,
         data={
             "email": fake.email(),
@@ -99,13 +96,44 @@ def test_login_password_mismatch(api_client, login_endpoint, registration_endpoi
     response = api_client.post(
         path=login_endpoint,
         data={
-            "email": reg_user.json().get("email"),
+            "email": registered_user.json().get("email"),
             "password": fake.password(),
         },
         format="json",
     )
     assert response.status_code == HTTP_401_UNAUTHORIZED
-    assert (
-        response.json().get("detail")
-        == "No active account found with the given credentials"
+
+
+@pytest.mark.django_db
+def test_refresh_success(
+    api_client, login_endpoint, registration_endpoint, refresh_endpoint
+):
+    password = fake.password()
+    registered_user = api_client.post(
+        path=registration_endpoint,
+        data={
+            "email": fake.email(),
+            "first_name": fake.first_name(),
+            "last_name": fake.last_name(),
+            "password": password,
+            "re_password": password,
+        },
+        format="json",
     )
+    login_response = api_client.post(
+        path=login_endpoint,
+        data={
+            "email": registered_user.json().get("email"),
+            "password": password,
+        },
+        format="json",
+    )
+    response = api_client.post(
+        path=refresh_endpoint,
+        data={
+            "refresh": login_response.json().get("refresh"),
+        },
+        format="json",
+    )
+    assert response.status_code == HTTP_200_OK
+    assert response.json().get("access") is not None

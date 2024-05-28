@@ -86,11 +86,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         verbose_name = "User"
         verbose_name_plural = "Users"
-
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        """Send an email to this user."""
-        send_mail(subject, message, from_email, [self.email], **kwargs)
-
-    def __str__(self):
-        """Unicode representation of User."""
-        return self.email

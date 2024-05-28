@@ -15,7 +15,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = super().post(request, *args, **kwargs)
-        print(response)
 
         if response.status_code == status.HTTP_200_OK:
             access_token = response.data.get("access")
@@ -40,5 +39,29 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             path=settings.AUTH_COOKIE_PATH,
             secure=settings.AUTH_COOKIE_SECURE,
         )
+
+        return response
+
+
+class CustomTokenRefreshView(TokenRefreshView):
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        refresh_token = request.COOKIES.get("refresh")
+
+        if refresh_token:
+            request.data["refresh"] = refresh_token
+
+        response = super().post(request, *args, **kwargs)
+
+        if response.status_code == status.HTTP_200_OK:
+            access_token = response.data.get("access")
+            response.set_cookie(
+                key="access",
+                value=access_token,
+                httponly=settings.AUTH_COOKIE_HTTPONLY,
+                samesite=settings.AUTH_COOKIE_SAMESITE,
+                max_age=settings.AUTH_COOKIE_ACCESS_MAX_AGE,
+                path=settings.AUTH_COOKIE_PATH,
+                secure=settings.AUTH_COOKIE_SECURE,
+            )
 
         return response

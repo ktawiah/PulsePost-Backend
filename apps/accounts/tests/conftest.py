@@ -18,3 +18,9 @@ def registration_endpoint():
 def login_endpoint():
     url = reverse("jwt_create")
     return url
+
+
+@pytest.fixture
+def refresh_endpoint():
+    url = reverse("jwt_refresh")
+    return url
