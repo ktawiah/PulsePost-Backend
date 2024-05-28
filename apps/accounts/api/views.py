@@ -65,3 +65,15 @@ class CustomTokenRefreshView(TokenRefreshView):
             )
 
         return response
+
+
+class CustomTokenVerifyView(TokenVerifyView):
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        access_token = request.COOKIES.get("access")
+
+        if access_token:
+            request.data["token"] = access_token
+
+        response = super().post(request, *args, **kwargs)
+
+        return response

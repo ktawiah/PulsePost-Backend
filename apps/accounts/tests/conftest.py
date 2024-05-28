@@ -24,3 +24,9 @@ def login_endpoint():
 def refresh_endpoint():
     url = reverse("jwt_refresh")
     return url
+
+
+@pytest.fixture
+def verify_endpoint():
+    url = reverse("jwt_verify")
+    return url

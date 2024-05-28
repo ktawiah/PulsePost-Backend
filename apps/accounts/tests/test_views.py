@@ -137,3 +137,37 @@ def test_refresh_success(
     )
     assert response.status_code == HTTP_200_OK
     assert response.json().get("access") is not None
+
+
+@pytest.mark.django_db
+def test_verify_success(
+    api_client, login_endpoint, registration_endpoint, refresh_endpoint
+):
+    password = fake.password()
+    registered_user = api_client.post(
+        path=registration_endpoint,
+        data={
+            "email": fake.email(),
+            "first_name": fake.first_name(),
+            "last_name": fake.last_name(),
+            "password": password,
+            "re_password": password,
+        },
+        format="json",
+    )
+    login_response = api_client.post(
+        path=login_endpoint,
+        data={
+            "email": registered_user.json().get("email"),
+            "password": password,
+        },
+        format="json",
+    )
+    response = api_client.post(
+        path=refresh_endpoint,
+        data={
+            "token": login_response.json().get("access"),
+        },
+        format="json",
+    )
+    assert response.status_code == HTTP_200_OK
