@@ -4,6 +4,7 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 from rest_framework.request import Request
+from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from django.conf import settings
@@ -75,5 +76,16 @@ class CustomTokenVerifyView(TokenVerifyView):
             request.data["token"] = access_token
 
         response = super().post(request, *args, **kwargs)
+
+        return response
+
+
+class LogoutView(APIView):
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        response = Response(status=status.HTTP_204_NO_CONTENT)
+
+        if response:
+            response.delete_cookie("access")
+            response.delete_cookie("refresh")
 
         return response

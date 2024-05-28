@@ -5,14 +5,13 @@ from rest_framework.status import (
     HTTP_201_CREATED,
     HTTP_400_BAD_REQUEST,
     HTTP_401_UNAUTHORIZED,
+    HTTP_204_NO_CONTENT,
 )
 from rest_framework.test import force_authenticate
-from rest_framework.test import force_authenticate, APIRequestFactory
 from .factories import UserFactory
 from ..api.views import CustomTokenObtainPairView
 
 fake = Faker()
-request_factory = APIRequestFactory()
 
 
 @pytest.mark.django_db
@@ -171,3 +170,13 @@ def test_verify_success(
         format="json",
     )
     assert response.status_code == HTTP_200_OK
+
+
+@pytest.mark.django_db
+def test_logout_success(
+    api_client, login_endpoint, registration_endpoint, logout_endpoint
+):
+    response = api_client.post(
+        path=logout_endpoint,
+    )
+    assert response.status_code == HTTP_204_NO_CONTENT

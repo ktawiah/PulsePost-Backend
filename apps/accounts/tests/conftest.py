@@ -30,3 +30,9 @@ def refresh_endpoint():
 def verify_endpoint():
     url = reverse("jwt_verify")
     return url
+
+
+@pytest.fixture
+def logout_endpoint():
+    url = reverse("account_logout")
+    return url
