@@ -10,7 +10,7 @@ fake = Faker()
 class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
-        skip_postgeneration_save = False
+        skip_postgeneration_save = True
 
     id = fake.uuid4()
     first_name = fake.first_name()
