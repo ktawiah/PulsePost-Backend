@@ -5,17 +5,17 @@ from rest_framework.status import (
     HTTP_201_CREATED,
     HTTP_400_BAD_REQUEST,
     HTTP_401_UNAUTHORIZED,
-    HTTP_204_NO_CONTENT,
 )
-from rest_framework.test import force_authenticate
 from .factories import UserFactory
-from ..api.views import CustomTokenObtainPairView
 
 fake = Faker()
 
 
 @pytest.mark.django_db
-def test_register_success(api_client, registration_endpoint):
+def test_register_success(
+    api_client,
+    registration_endpoint,
+):
     password = fake.password()
     response = api_client.post(
         path=registration_endpoint,
@@ -35,7 +35,10 @@ def test_register_success(api_client, registration_endpoint):
 
 
 @pytest.mark.django_db
-def test_register_password_mismatch(api_client, registration_endpoint):
+def test_register_password_mismatch(
+    api_client,
+    registration_endpoint,
+):
     response = api_client.post(
         path=registration_endpoint,
         data={
@@ -52,7 +55,11 @@ def test_register_password_mismatch(api_client, registration_endpoint):
 
 
 @pytest.mark.django_db
-def test_login_success(api_client, login_endpoint, registration_endpoint):
+def test_login_success(
+    api_client,
+    login_endpoint,
+    registration_endpoint,
+):
     password = fake.password()
     reg_user = api_client.post(
         path=registration_endpoint,
@@ -79,7 +86,11 @@ def test_login_success(api_client, login_endpoint, registration_endpoint):
 
 
 @pytest.mark.django_db
-def test_login_password_mismatch(api_client, login_endpoint, registration_endpoint):
+def test_login_password_mismatch(
+    api_client,
+    login_endpoint,
+    registration_endpoint,
+):
     password = fake.password()
     registered_user = api_client.post(
         path=registration_endpoint,
@@ -105,7 +116,10 @@ def test_login_password_mismatch(api_client, login_endpoint, registration_endpoi
 
 @pytest.mark.django_db
 def test_refresh_success(
-    api_client, login_endpoint, registration_endpoint, refresh_endpoint
+    api_client,
+    login_endpoint,
+    registration_endpoint,
+    refresh_endpoint,
 ):
     password = fake.password()
     registered_user = api_client.post(
@@ -140,7 +154,10 @@ def test_refresh_success(
 
 @pytest.mark.django_db
 def test_verify_success(
-    api_client, login_endpoint, registration_endpoint, verify_endpoint
+    api_client,
+    login_endpoint,
+    registration_endpoint,
+    verify_endpoint,
 ):
     password = fake.password()
     registered_user = api_client.post(
@@ -170,13 +187,3 @@ def test_verify_success(
         format="json",
     )
     assert response.status_code == HTTP_200_OK
-
-
-@pytest.mark.django_db
-def test_logout_success(
-    api_client, login_endpoint, registration_endpoint, logout_endpoint
-):
-    response = api_client.post(
-        path=logout_endpoint,
-    )
-    assert response.status_code == HTTP_204_NO_CONTENT

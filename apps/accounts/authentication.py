@@ -5,7 +5,10 @@ from django.core.exceptions import PermissionDenied
 
 
 def enforce_csrf(request: Request):
-    check = CSRFCheck()
+    def dummy_get_response(request):  # pragma: no cover
+        return None
+
+    check = CSRFCheck(dummy_get_response)
     check.process_request(request)
     reason = check.process_view(request, None, (), {})
     if reason:

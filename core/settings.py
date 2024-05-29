@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = [
     "social_django",
     "corsheaders",
     "sendgrid",
+    "drf_yasg",
 ]
 
 DJANGO_APPS = [
@@ -57,6 +58,7 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     "apps.accounts",
+    "apps.posts",
 ]
 
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
@@ -157,7 +159,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "apps.accounts.authentication.CustomJWTAuthentication",
-    )
+    ),
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ],
 }
 
 AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5
@@ -236,3 +241,13 @@ SOCIAL_AUTH_GITHUB_SCOPE = ["user:email", "user"]
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+        }
+    }
+}

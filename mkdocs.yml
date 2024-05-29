@@ -1,0 +1,14 @@
+site_name: My Project API Documentation
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - API:
+      - Overview: api/index.md
+      - Users: api/users.md
+      # - Groups: api/groups.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
