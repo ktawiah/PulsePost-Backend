@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = [
     "djoser",
     "social_django",
     "corsheaders",
+    "sendgrid",
 ]
 
 DJANGO_APPS = [
@@ -231,3 +232,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ["email", "openid", "profile"]
 SOCIAL_AUTH_GITHUB_KEY = os.getenv("SOCIAL_AUTH_GITHUB_KEY")
 SOCIAL_AUTH_GITHUB_SECRET = os.getenv("SOCIAL_AUTH_GITHUB_SECRET")
 SOCIAL_AUTH_GITHUB_SCOPE = ["user:email", "user"]
+
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False

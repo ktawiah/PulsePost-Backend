@@ -10,6 +10,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.conf import settings
 from .serializers import CustomTokenObtainPairSerializer
+from django.core.mail import send_mail
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
