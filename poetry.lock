@@ -328,6 +328,20 @@ asgiref = ">=3.6"
 Django = ">=3.2"
 
 [[package]]
+name = "django-jazzmin"
+version = "3.0.0"
+description = "Drop-in theme for django admin, that utilises AdminLTE 3 & Bootstrap 4 to make yo' admin look jazzy"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_jazzmin-3.0.0-py3-none-any.whl", hash = "sha256:95ef5d7571519c4c53c24083ec417a0db126aaf1d7dc7311e034a90e430392b3"},
+    {file = "django_jazzmin-3.0.0.tar.gz", hash = "sha256:424ac3e0f7bfd9ce973b581a66abde92035ba6c5b17605615fdf6bd97c4dcb33"},
+]
+
+[package.dependencies]
+django = ">=4.2"
+
+[[package]]
 name = "django-sendgrid-v5"
 version = "1.2.3"
 description = "An implementation of Django's EmailBackend compatible with sendgrid-python v5+"
@@ -342,6 +356,17 @@ files = [
 django = ">=1.8"
 python-http-client = ">=3.0.0"
 sendgrid = ">=5.0.0"
+
+[[package]]
+name = "django-split-settings"
+version = "1.3.1"
+description = "Organize Django settings into multiple files and directories. Easily override and modify settings. Use wildcards and optional settings files."
+optional = false
+python-versions = "<4.0,>=3.9"
+files = [
+    {file = "django_split_settings-1.3.1-py3-none-any.whl", hash = "sha256:c902ef60d5fe8190ff224284f68e3c9015b6f1aca9e9d6bd70bf86394ff32634"},
+    {file = "django_split_settings-1.3.1.tar.gz", hash = "sha256:c1f57f6b54fc0d93082c12163e76fad082c214f5fa0d16d84a1226d2c9f14f26"},
+]
 
 [[package]]
 name = "django-templated-mail"
@@ -995,6 +1020,17 @@ files = [
 six = ">=1.5"
 
 [[package]]
+name = "python-decouple"
+version = "3.8"
+description = "Strict separation of settings from code."
+optional = false
+python-versions = "*"
+files = [
+    {file = "python-decouple-3.8.tar.gz", hash = "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f"},
+    {file = "python_decouple-3.8-py3-none-any.whl", hash = "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"},
+]
+
+[[package]]
 name = "python-dotenv"
 version = "1.0.1"
 description = "Read key-value pairs from a .env file and set them as environment variables"
@@ -1439,21 +1475,7 @@ files = [
 [package.extras]
 watchmedo = ["PyYAML (>=3.10)"]
 
-[[package]]
-name = "whitenoise"
-version = "6.6.0"
-description = "Radically simplified static file serving for WSGI applications"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "whitenoise-6.6.0-py3-none-any.whl", hash = "sha256:b1f9db9bf67dc183484d760b99f4080185633136a273a03f6436034a41064146"},
-    {file = "whitenoise-6.6.0.tar.gz", hash = "sha256:8998f7370973447fac1e8ef6e8ded2c5209a7b1f67c1012866dbcd09681c3251"},
-]
-
-[package.extras]
-brotli = ["Brotli"]
-
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "fe473408c9c8dad2f22efa8c95a7c8a0eb03bef2602a0dcee437e4c9a87e6a35"
+content-hash = "b87f50b9cc91ab59b2de3ad0913f0ff79f93072a255f01942b16781d93e17636"

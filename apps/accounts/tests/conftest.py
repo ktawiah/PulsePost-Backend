@@ -16,25 +16,19 @@ def registration_endpoint():
 
 @pytest.fixture
 def login_endpoint():
-    url = reverse("jwt_create")
+    url = reverse("account_login")
     return url
 
 
 @pytest.fixture
 def refresh_endpoint():
-    url = reverse("jwt_refresh")
+    url = reverse("account_refresh")
     return url
 
 
 @pytest.fixture
 def verify_endpoint():
-    url = reverse("jwt_verify")
-    return url
-
-
-@pytest.fixture
-def logout_endpoint():
-    url = reverse("account_logout")
+    url = reverse("account_verify")
     return url
 
 
@@ -44,11 +38,11 @@ base_url = "http://localhost:8000"
 
 @pytest.fixture
 def google_auth_endpoint():
-    url = f"{base_url}/api/auth/o/google-oauth2/"
+    url = f"{base_url}/auth/oauth/google-oauth2/"
     return url
 
 
 @pytest.fixture
 def github_auth_endpoint():
-    url = f"{base_url}/api/auth/o/github/"
+    url = f"{base_url}/auth/oauth/github/"
     return url
