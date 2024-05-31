@@ -6,12 +6,15 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="WeBLOG API Documentation",
+        title="PulsePost API Documentation",
         default_version="v1",
-        description="Test description",
+        description="API for PulsePost blog platform",
         terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="contact@snippets.local"),
-        license=openapi.License(name="BSD License"),
+        contact=openapi.Contact(
+            name="Kelvin Tawiah",
+            email="kelvintawiah224@gmail.com",
+            url="https://kelvintawiahdev.vercel.app/",
+        ),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
