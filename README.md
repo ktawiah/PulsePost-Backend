@@ -22,8 +22,7 @@ This project is the backend for PulsePost, a blog app designed to provide a seam
 - (Optional) SendGrid account for email functionality
 
 ## Image of Web API
-![Screenshot]("https://github.com/ktawiah/PulsePost-Backend/tree/main/images/PulsePost2.png")
-
+<img src="https://github.com/ktawiah/PulsePost-Backend/blob/main/images/PulsePost2.png" alt="Screenshot"/>
 ## Getting Started
 
 Follow these instructions to set up this project locally on your device.
