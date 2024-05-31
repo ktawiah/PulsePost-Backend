@@ -12,6 +12,7 @@ from django.conf import settings
 from .serializers import CustomTokenObtainPairSerializer
 from django.core.mail import send_mail
 from django.conf import settings
+from settings.base import Base
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -27,21 +28,21 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         response.set_cookie(
             key="access",
             value=access_token,
-            httponly=settings.AUTH_COOKIE_HTTPONLY,
-            samesite=settings.AUTH_COOKIE_SAMESITE,
-            max_age=settings.AUTH_COOKIE_ACCESS_MAX_AGE,
-            path=settings.AUTH_COOKIE_PATH,
-            secure=settings.AUTH_COOKIE_SECURE,
+            httponly=Base.AUTH_COOKIE_HTTPONLY,
+            samesite=Base.AUTH_COOKIE_SAMESITE,
+            max_age=Base.AUTH_COOKIE_ACCESS_MAX_AGE,
+            path=Base.AUTH_COOKIE_PATH,
+            secure=Base.AUTH_COOKIE_SECURE,
         )
 
         response.set_cookie(
             key="refresh",
             value=refresh_token,
-            httponly=settings.AUTH_COOKIE_HTTPONLY,
-            samesite=settings.AUTH_COOKIE_SAMESITE,
-            max_age=settings.AUTH_COOKIE_REFRESH_MAX_AGE,
-            path=settings.AUTH_COOKIE_PATH,
-            secure=settings.AUTH_COOKIE_SECURE,
+            httponly=Base.AUTH_COOKIE_HTTPONLY,
+            samesite=Base.AUTH_COOKIE_SAMESITE,
+            max_age=Base.AUTH_COOKIE_REFRESH_MAX_AGE,
+            path=Base.AUTH_COOKIE_PATH,
+            secure=Base.AUTH_COOKIE_SECURE,
         )
 
         return response
@@ -61,11 +62,11 @@ class CustomTokenRefreshView(TokenRefreshView):
             response.set_cookie(
                 key="access",
                 value=access_token,
-                httponly=settings.AUTH_COOKIE_HTTPONLY,
-                samesite=settings.AUTH_COOKIE_SAMESITE,
-                max_age=settings.AUTH_COOKIE_ACCESS_MAX_AGE,
-                path=settings.AUTH_COOKIE_PATH,
-                secure=settings.AUTH_COOKIE_SECURE,
+                httponly=Base.AUTH_COOKIE_HTTPONLY,
+                samesite=Base.AUTH_COOKIE_SAMESITE,
+                max_age=Base.AUTH_COOKIE_ACCESS_MAX_AGE,
+                path=Base.AUTH_COOKIE_PATH,
+                secure=Base.AUTH_COOKIE_SECURE,
             )
 
         return response
@@ -105,21 +106,21 @@ class CustomProviderAuthView(ProviderAuthView):
         response.set_cookie(
             key="access",
             value=access_token,
-            httponly=settings.AUTH_COOKIE_HTTPONLY,
-            samesite=settings.AUTH_COOKIE_SAMESITE,
-            max_age=settings.AUTH_COOKIE_ACCESS_MAX_AGE,
-            path=settings.AUTH_COOKIE_PATH,
-            secure=settings.AUTH_COOKIE_SECURE,
+            httponly=Base.AUTH_COOKIE_HTTPONLY,
+            samesite=Base.AUTH_COOKIE_SAMESITE,
+            max_age=Base.AUTH_COOKIE_ACCESS_MAX_AGE,
+            path=Base.AUTH_COOKIE_PATH,
+            secure=Base.AUTH_COOKIE_SECURE,
         )
 
         response.set_cookie(
             key="refresh",
             value=refresh_token,
-            httponly=settings.AUTH_COOKIE_HTTPONLY,
-            samesite=settings.AUTH_COOKIE_SAMESITE,
-            max_age=settings.AUTH_COOKIE_REFRESH_MAX_AGE,
-            path=settings.AUTH_COOKIE_PATH,
-            secure=settings.AUTH_COOKIE_SECURE,
+            httponly=Base.AUTH_COOKIE_HTTPONLY,
+            samesite=Base.AUTH_COOKIE_SAMESITE,
+            max_age=Base.AUTH_COOKIE_REFRESH_MAX_AGE,
+            path=Base.AUTH_COOKIE_PATH,
+            secure=Base.AUTH_COOKIE_SECURE,
         )
 
         return response

@@ -7,6 +7,6 @@ For more information on this file, see
 https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 """
 
-from django.core.wsgi import get_wsgi_application
+from configurations.wsgi import get_wsgi_application
 
 application = get_wsgi_application()

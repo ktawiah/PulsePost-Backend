@@ -54,17 +54,21 @@ def test_register_password_mismatch(
     assert response.json().get("non_field_errors") is not None
 
 
+import pytest
+from django.core import mail
+from rest_framework.status import HTTP_200_OK
+
+
 @pytest.mark.django_db
-def test_login_success(
-    api_client,
-    login_endpoint,
-    registration_endpoint,
-):
+def test_login_success(api_client, login_endpoint, registration_endpoint):
     password = fake.password()
+    email = fake.email()
+
+    # Register the user
     reg_user = api_client.post(
         path=registration_endpoint,
         data={
-            "email": fake.email(),
+            "email": email,
             "first_name": fake.first_name(),
             "last_name": fake.last_name(),
             "password": password,
@@ -72,14 +76,39 @@ def test_login_success(
         },
         format="json",
     )
+
+    # Ensure registration was successful
+    assert reg_user.status_code == HTTP_201_CREATED
+
+    # Simulate email activation
+    assert len(mail.outbox) == 1
+    activation_email = mail.outbox[0]
+    activation_link = [
+        word for word in activation_email.body.split() if "http" in word
+    ][0]
+
+    # Extract uid and token from the activation link
+    activation_url_parts = activation_link.split("/")
+    uid = activation_url_parts[-2]
+    token = activation_url_parts[-1]
+
+    # Activate the user
+    activation_response = api_client.post(
+        path=f"/activate/{uid}/{token}/",
+        format="json",
+    )
+    # assert activation_response.status_code == HTTP_204_NO_CONTENT
+
+    # Attempt to log in
     response = api_client.post(
         path=login_endpoint,
         data={
-            "email": reg_user.json().get("email"),
+            "email": email,
             "password": password,
         },
         format="json",
     )
+
     assert response.status_code == HTTP_200_OK
     assert response.json().get("access") is not None
     assert response.json().get("refresh") is not None

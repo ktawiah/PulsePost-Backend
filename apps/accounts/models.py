@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         _("active"),
         default=True,
     )
-    bio = models.TextField(_("bio"))
+    bio = models.TextField(_("bio"), null=True, blank=True)
     avatar = models.ImageField(
         _("profile picture"),
         upload_to="images",
