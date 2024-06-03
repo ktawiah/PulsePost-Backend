@@ -1,10 +1,8 @@
 import os
-from pathlib import Path
 from datetime import timedelta
-from django.conf import settings
-from decouple import config
-from django.core.management.utils import get_random_secret_key
+
 from configurations import Configuration
+from decouple import config
 
 
 class Base(Configuration):
@@ -13,7 +11,6 @@ class Base(Configuration):
 
     SECRET_KEY = config(
         option="DJANGO_SECRET_KEY",
-        default=get_random_secret_key(),
     )
 
     THIRD_PARTY_APPS = [
@@ -36,7 +33,7 @@ class Base(Configuration):
 
     LOCAL_APPS = [
         "apps.accounts",
-        "apps.posts",
+        # "apps.posts",
     ]
 
     INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
@@ -134,8 +131,8 @@ class Base(Configuration):
             "user": "apps.accounts.api.serializers.CustomUserSerializer",
             "current_user": "apps.accounts.api.serializers.CustomUserSerializer",
         },
-        "SEND_ACTIVATION_EMAIL": True,
-        "ACTIVATION_URL": "activate/{uid}/{token}",
+        # "SEND_ACTIVATION_EMAIL": True,
+        # "ACTIVATION_URL": "activate/{uid}/{token}",
         "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}",
         "USER_CREATE_PASSWORD_RETYPE": True,
         "LOGOUT_ON_PASSWORD_CHANGE": True,

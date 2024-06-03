@@ -24,4 +24,12 @@ install:
 
 .PHONY: test
 test:
-	poetry run pytest -rP
+	poetry run pytest -rS -n auto --show-capture=no
+
+.PHONY: install-precommit
+install-precommit:
+	poetry run pre-commit uninstall; poetry run pre-commit install
+
+.PHONY: lint
+lint:
+	poetry run pre-commit run --all-files

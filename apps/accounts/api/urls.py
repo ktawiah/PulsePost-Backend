@@ -1,12 +1,13 @@
-from django.urls import path, include
+from django.urls import path
+from djoser.views import UserViewSet
+
 from .views import (
+    CustomProviderAuthView,
     CustomTokenObtainPairView,
     CustomTokenRefreshView,
     CustomTokenVerifyView,
     LogoutView,
-    CustomProviderAuthView,
 )
-from djoser.views import UserViewSet
 
 urlpatterns = [
     path(

@@ -2,6 +2,7 @@ from django.contrib.auth.models import UserManager
 
 
 class CustomUserManager(UserManager):
+
     def _create_user(self, email, password, **extra_fields):
         """
         Create and save a user with the given email, and password.

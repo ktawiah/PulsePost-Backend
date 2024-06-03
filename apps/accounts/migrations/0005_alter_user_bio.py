@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user_accounts', '0004_remove_user__avatar_user_avatar'),
+        ("user_accounts", "0004_remove_user__avatar_user_avatar"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='bio',
-            field=models.TextField(blank=True, null=True, verbose_name='bio'),
+            model_name="user",
+            name="bio",
+            field=models.TextField(blank=True, null=True, verbose_name="bio"),
         ),
     ]

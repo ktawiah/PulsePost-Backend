@@ -1,6 +1,6 @@
 import pytest
-from rest_framework.test import APIClient
 from django.urls import reverse
+from rest_framework.test import APIClient
 
 
 @pytest.fixture
@@ -10,7 +10,7 @@ def api_client():
 
 @pytest.fixture
 def registration_endpoint():
-    url = reverse("user-list")
+    url = reverse("account_register")
     return url
 
 
@@ -38,11 +38,11 @@ base_url = "http://localhost:8000"
 
 @pytest.fixture
 def google_auth_endpoint():
-    url = f"{base_url}/auth/oauth/google-oauth2/"
+    url = f"{base_url}/api/auth/oauth/google-oauth2/"
     return url
 
 
 @pytest.fixture
 def github_auth_endpoint():
-    url = f"{base_url}/auth/oauth/github/"
+    url = f"{base_url}/api/auth/oauth/github/"
     return url

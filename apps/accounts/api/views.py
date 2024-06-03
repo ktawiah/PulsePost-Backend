@@ -1,18 +1,17 @@
+from djoser.social.views import ProviderAuthView
+from rest_framework import status
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
     TokenVerifyView,
 )
-from djoser.social.views import ProviderAuthView
-from rest_framework.request import Request
-from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework.response import Response
-from django.conf import settings
-from .serializers import CustomTokenObtainPairSerializer
-from django.core.mail import send_mail
-from django.conf import settings
+
 from settings.base import Base
+
+from .serializers import CustomTokenObtainPairSerializer
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -49,6 +48,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
 
 class CustomTokenRefreshView(TokenRefreshView):
+
     def post(self, request: Request, *args, **kwargs) -> Response:
         refresh_token = request.COOKIES.get("refresh")
 
@@ -73,6 +73,7 @@ class CustomTokenRefreshView(TokenRefreshView):
 
 
 class CustomTokenVerifyView(TokenVerifyView):
+
     def post(self, request: Request, *args, **kwargs) -> Response:
         access_token = request.COOKIES.get("access")
 
@@ -85,6 +86,7 @@ class CustomTokenVerifyView(TokenVerifyView):
 
 
 class LogoutView(APIView):
+
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -96,6 +98,7 @@ class LogoutView(APIView):
 
 
 class CustomProviderAuthView(ProviderAuthView):
+
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = super().post(request, *args, **kwargs)
 
