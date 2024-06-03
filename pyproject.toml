@@ -28,6 +28,13 @@ django-configurations = "^2.5.1"
 pytest = "^8.2.1"
 factory-boy = "^3.3.0"
 pytest-django = "^4.8.0"
+pytest-xdist = "^3.6.1"
+pre-commit = "^3.7.1"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "settings"
+testpaths = "tests"
+python_files = "test_*.py"
 
 [build-system]
 requires = ["poetry-core"]

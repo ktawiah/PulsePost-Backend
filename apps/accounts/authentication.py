@@ -1,10 +1,11 @@
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.request import Request
-from rest_framework.authentication import CSRFCheck
 from django.core.exceptions import PermissionDenied
+from rest_framework.authentication import CSRFCheck
+from rest_framework.request import Request
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 def enforce_csrf(request: Request):
+
     def dummy_get_response(request):  # pragma: no cover
         return None
 
@@ -16,6 +17,7 @@ def enforce_csrf(request: Request):
 
 
 class CustomJWTAuthentication(JWTAuthentication):
+
     def authenticate(self, request: Request):
         header = self.get_header(request)
         if header is None:

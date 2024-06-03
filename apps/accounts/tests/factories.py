@@ -1,5 +1,4 @@
 import factory
-from factory import LazyFunction
 from faker import Faker
 
 from ..models import User
@@ -8,6 +7,7 @@ fake = Faker()
 
 
 class UserFactory(factory.django.DjangoModelFactory):
+
     class Meta:
         model = User
         skip_postgeneration_save = True
