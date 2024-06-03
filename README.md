@@ -26,7 +26,7 @@ This project is the backend for PulsePost, a blog app designed to provide a seam
 
 ## Image of Web API
 
-![Screenshot]("https://github.com/ktawiah/PulsePost-Backend/tree/main/images/PulsePost2.png")
+<img src="https://github.com/ktawiah/PulsePost-Backend/blob/main/images/PulsePost2.png" alt="Screenshot"/>
 
 ## Getting Started
 
@@ -116,5 +116,4 @@ Once the backend server is running, you can interact with the API. Below are a f
 Refer to the API documentation for more details.
 
 ## Contributing
-
 Contributions to this project are welcomed! If you have any issues with the project or have some ideas for enhancements to contribute, please don't hesitate to open an issue or submit a pull request. Your input is much appreciated.
