@@ -14,7 +14,7 @@ fake = Faker()
 log = getLogger(__name__)
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db()
 def test_register_success(
     api_client,
     registration_endpoint,
@@ -32,12 +32,13 @@ def test_register_success(
         format="json",
     )
     assert response.status_code == HTTP_201_CREATED
-    assert response.json().get("email") is not None
-    assert response.json().get("first_name") is not None
-    assert response.json().get("last_name") is not None
+    assert response.json().get("data") is not None
+    assert response.json()["data"].get("email") is not None
+    assert response.json()["data"].get("first_name") is not None
+    assert response.json()["data"].get("last_name") is not None
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db()
 def test_register_password_mismatch(
     api_client,
     registration_endpoint,
@@ -54,10 +55,10 @@ def test_register_password_mismatch(
         format="json",
     )
     assert response.status_code == HTTP_400_BAD_REQUEST
-    assert response.json().get("non_field_errors") is not None
+    assert response.json()["error"].get("non_field_errors") is not None
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db()
 def test_login_success(
     api_client,
     login_endpoint,
@@ -78,18 +79,19 @@ def test_login_success(
     response = api_client.post(
         path=login_endpoint,
         data={
-            "email": reg_user.json().get("email"),
+            "email": reg_user.json()["data"].get("email"),
             "password": password,
         },
         format="json",
     )
     log.info(response.json())
     assert response.status_code == HTTP_200_OK
-    assert response.json().get("access") is not None
-    assert response.json().get("refresh") is not None
+    assert response.json().get("data") is not None
+    assert response.json()["data"].get("access") is not None
+    assert response.json()["data"].get("refresh") is not None
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db()
 def test_login_password_mismatch(
     api_client,
     login_endpoint,
@@ -110,7 +112,7 @@ def test_login_password_mismatch(
     response = api_client.post(
         path=login_endpoint,
         data={
-            "email": registered_user.json().get("email"),
+            "email": registered_user.json()["data"].get("email"),
             "password": fake.password(),
         },
         format="json",
@@ -118,7 +120,7 @@ def test_login_password_mismatch(
     assert response.status_code == HTTP_401_UNAUTHORIZED
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db()
 def test_refresh_success(
     api_client,
     login_endpoint,
@@ -140,7 +142,7 @@ def test_refresh_success(
     login_response = api_client.post(
         path=login_endpoint,
         data={
-            "email": registered_user.json().get("email"),
+            "email": registered_user.json()["data"].get("email"),
             "password": password,
         },
         format="json",
@@ -156,7 +158,7 @@ def test_refresh_success(
     assert response.json().get("access") is not None
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db()
 def test_verify_success(
     api_client,
     login_endpoint,
@@ -178,7 +180,7 @@ def test_verify_success(
     login_response = api_client.post(
         path=login_endpoint,
         data={
-            "email": registered_user.json().get("email"),
+            "email": registered_user.json()["data"].get("email"),
             "password": password,
         },
         format="json",
@@ -186,7 +188,7 @@ def test_verify_success(
     response = api_client.post(
         path=verify_endpoint,
         data={
-            "token": login_response.json().get("access"),
+            "token": login_response.json()["data"].get("access"),
         },
         format="json",
     )

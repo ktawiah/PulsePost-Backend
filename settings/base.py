@@ -33,7 +33,7 @@ class Base(Configuration):
 
     LOCAL_APPS = [
         "apps.accounts",
-        # "apps.posts",
+        "apps.posts",
     ]
 
     INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
@@ -108,6 +108,10 @@ class Base(Configuration):
         "DEFAULT_PERMISSION_CLASSES": [
             "rest_framework.permissions.IsAuthenticatedOrReadOnly",
         ],
+        "DEFAULT_RENDERER_CLASSES": [
+            "rest_framework.renderers.JSONRenderer",
+            "rest_framework.renderers.BrowsableAPIRenderer",
+        ],
     }
 
     AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5
@@ -115,7 +119,13 @@ class Base(Configuration):
     AUTH_COOKIE_SAMESITE = None
     AUTH_COOKIE_HTTPONLY = True
     AUTH_COOKIE_PATH = "/"
-    AUTH_COOKIE_SECURE = config(option="AUTH_COOKIE_SECURE", default="True") == "True"
+    AUTH_COOKIE_SECURE = (
+        config(
+            option="AUTH_COOKIE_SECURE",
+            default="True",
+        )
+        == "True"
+    )
 
     SIMPLE_JWT = {
         "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
@@ -152,11 +162,18 @@ class Base(Configuration):
 
     SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
     SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
-    SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ["email", "openid", "profile"]
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+        "email",
+        "openid",
+        "profile",
+    ]
 
     SOCIAL_AUTH_GITHUB_KEY = config("SOCIAL_AUTH_GITHUB_KEY")
     SOCIAL_AUTH_GITHUB_SECRET = config("SOCIAL_AUTH_GITHUB_SECRET")
-    SOCIAL_AUTH_GITHUB_SCOPE = ["user:email", "user"]
+    SOCIAL_AUTH_GITHUB_SCOPE = [
+        "user:email",
+        "user",
+    ]
 
     EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
     DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
@@ -169,6 +186,6 @@ class Base(Configuration):
                 "type": "apiKey",
                 "name": "Authorization",
                 "in": "header",
-            }
-        }
+            },
+        },
     }

@@ -1,6 +1,9 @@
 from uuid import uuid4
 
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    PermissionsMixin,
+)
 from django.db import models
 from django.utils.translation import gettext as _
 
@@ -18,8 +21,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_index=True,
         unique=True,
     )
-    email = models.EmailField(_("email address"), blank=True, db_index=True, unique=True)
-    first_name = models.CharField(_("first name"), max_length=150, blank=True)
+    email = models.EmailField(
+        _("email address"),
+        blank=True,
+        db_index=True,
+        unique=True,
+    )
+    first_name = models.CharField(
+        _("first name"),
+        max_length=150,
+        blank=True,
+    )
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
     is_staff = models.BooleanField(
         _("staff status"),
