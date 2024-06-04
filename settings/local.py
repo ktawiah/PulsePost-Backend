@@ -12,7 +12,7 @@ class Local(Base):
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": os.path.join(Base.BASE_DIR, "db.sqlite3"),
-        }
+        },
     }
 
     CORS_ALLOW_ALL_ORIGINS = True

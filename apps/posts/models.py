@@ -34,19 +34,19 @@ class Post(models.Model):
     featured_image = models.ImageField(_("featured image"), upload_to="images")
     created_at = models.DateTimeField(_("created at"), auto_now=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now_add=True)
-    status = models.CharField(_("status"), max_length=11, choices=Status.choices(), default=Status.DRAFT)
+    status = models.CharField(
+        _("status"),
+        max_length=11,
+        choices=Status.choices(),
+        default=Status.DRAFT,
+    )
+    likes = models.IntegerField(_("likes"))
 
     class Meta:
         """Meta definition for Post."""
 
         verbose_name = "Post"
         verbose_name_plural = "Posts"
-
-    def recent_post(self):
-        pass
-
-    def all_posts(self):
-        pass
 
     def __str__(self):
         """Unicode representation of Post."""

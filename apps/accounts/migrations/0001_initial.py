@@ -8,7 +8,6 @@ import apps.accounts.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -22,7 +21,9 @@ class Migration(migrations.Migration):
                 ("password", models.CharField(max_length=128, verbose_name="password")),
                 (
                     "last_login",
-                    models.DateTimeField(blank=True, null=True, verbose_name="last login"),
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
                 ),
                 (
                     "is_superuser",
@@ -56,11 +57,15 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "first_name",
-                    models.CharField(blank=True, max_length=150, verbose_name="first name"),
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="first name"
+                    ),
                 ),
                 (
                     "last_name",
-                    models.CharField(blank=True, max_length=150, verbose_name="last name"),
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="last name"
+                    ),
                 ),
                 (
                     "is_staff",
@@ -70,7 +75,9 @@ class Migration(migrations.Migration):
                 ("bio", models.TextField(verbose_name="bio")),
                 (
                     "avatar",
-                    models.ImageField(upload_to="images", verbose_name="profile picture"),
+                    models.ImageField(
+                        upload_to="images", verbose_name="profile picture"
+                    ),
                 ),
                 (
                     "create_at",
@@ -84,8 +91,7 @@ class Migration(migrations.Migration):
                     "groups",
                     models.ManyToManyField(
                         blank=True,
-                        help_text=
-                        "The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+                        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
                         related_name="user_set",
                         related_query_name="user",
                         to="auth.group",

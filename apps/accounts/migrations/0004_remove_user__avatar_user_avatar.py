@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("user_accounts", "0003_rename_avatar_user__avatar"),
     ]

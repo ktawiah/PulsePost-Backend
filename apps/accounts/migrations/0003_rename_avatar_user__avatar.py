@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("user_accounts", "0002_rename_create_at_user_created_at"),
     ]

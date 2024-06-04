@@ -1,11 +1,19 @@
-from django.contrib.auth.models import update_last_login
-from djoser.serializers import UserCreateSerializer, UserSerializer
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.settings import api_settings
+from django.contrib.auth.models import (
+    update_last_login,
+)
+from djoser.serializers import (
+    UserCreateSerializer,
+    UserSerializer,
+)
+from rest_framework_simplejwt.serializers import (
+    TokenObtainPairSerializer,
+)
+from rest_framework_simplejwt.settings import (
+    api_settings,
+)
 
 
 class CustomUserSerializer(UserSerializer):
-
     class Meta(UserCreateSerializer.Meta):
         fields = [
             "id",
@@ -34,16 +42,18 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         if api_settings.UPDATE_LAST_LOGIN:
             update_last_login(None, self.user)
 
-        data.update({
-            "id": self.user.id,
-            "email": self.user.email,
-            "first_name": self.user.first_name,
-            "last_name": self.user.last_name,
-            "is_active": self.user.is_active,
-            "bio": self.user.bio,
-            "avatar": str(self.user.avatar),
-            "created_at": self.user.created_at,
-            "updated_at": self.user.updated_at,
-        })
+        data.update(
+            {
+                "id": self.user.id,
+                "email": self.user.email,
+                "first_name": self.user.first_name,
+                "last_name": self.user.last_name,
+                "is_active": self.user.is_active,
+                "bio": self.user.bio,
+                "avatar": str(self.user.avatar),
+                "created_at": self.user.created_at,
+                "updated_at": self.user.updated_at,
+            },
+        )
 
         return data

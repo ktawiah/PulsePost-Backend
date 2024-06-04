@@ -1,4 +1,5 @@
 from djoser.social.views import ProviderAuthView
+from djoser.views import UserViewSet
 from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -11,11 +12,19 @@ from rest_framework_simplejwt.views import (
 
 from settings.base import Base
 
-from .serializers import CustomTokenObtainPairSerializer
+from ..renderers import AccountsRenderer
+from .serializers import (
+    CustomTokenObtainPairSerializer,
+)
+
+
+class CustomUserViewSet(UserViewSet):
+    renderer_classes = [AccountsRenderer]
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+    renderer_classes = [AccountsRenderer]
 
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = super().post(request, *args, **kwargs)
@@ -48,7 +57,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
 
 class CustomTokenRefreshView(TokenRefreshView):
-
     def post(self, request: Request, *args, **kwargs) -> Response:
         refresh_token = request.COOKIES.get("refresh")
 
@@ -73,7 +81,6 @@ class CustomTokenRefreshView(TokenRefreshView):
 
 
 class CustomTokenVerifyView(TokenVerifyView):
-
     def post(self, request: Request, *args, **kwargs) -> Response:
         access_token = request.COOKIES.get("access")
 
@@ -86,7 +93,6 @@ class CustomTokenVerifyView(TokenVerifyView):
 
 
 class LogoutView(APIView):
-
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -98,7 +104,6 @@ class LogoutView(APIView):
 
 
 class CustomProviderAuthView(ProviderAuthView):
-
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = super().post(request, *args, **kwargs)
 
