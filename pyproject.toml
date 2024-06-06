@@ -38,7 +38,7 @@ testpaths = "tests"
 python_files = "test_*.py"
 
 [tool.ruff]
-line-length = 88
+line-length = 120
 exclude = [
     ".venv",
     "*/migrations/*",
@@ -49,6 +49,10 @@ exclude = [
 
 [tool.ruff.lint]
 fixable = ["ALL"]
+
+[tool.black]
+target-version = ["py312"]
+line-length = 120
 
 [tool.ruff.format]
 quote-style = "double"

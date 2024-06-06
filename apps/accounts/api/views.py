@@ -4,18 +4,12 @@ from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView,
-)
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 from settings.base import Base
 
 from ..renderers import AccountsRenderer
-from .serializers import (
-    CustomTokenObtainPairSerializer,
-)
+from .serializers import CustomTokenObtainPairSerializer
 
 
 class CustomUserViewSet(UserViewSet):

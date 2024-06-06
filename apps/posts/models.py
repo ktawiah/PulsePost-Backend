@@ -31,7 +31,7 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(_("title"), max_length=255, db_index=True)
     content = models.TextField(_("content"))
-    featured_image = models.ImageField(_("featured image"), upload_to="images")
+    featured_image = models.ImageField(_("featured image"), upload_to="images", blank=True, null=True)
     created_at = models.DateTimeField(_("created at"), auto_now=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now_add=True)
     status = models.CharField(
@@ -40,7 +40,7 @@ class Post(models.Model):
         choices=Status.choices(),
         default=Status.DRAFT,
     )
-    likes = models.IntegerField(_("likes"))
+    likes = models.IntegerField(_("likes"), default=0)
 
     class Meta:
         """Meta definition for Post."""
