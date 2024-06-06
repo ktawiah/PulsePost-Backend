@@ -34,16 +34,12 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "title",
-                    models.CharField(
-                        db_index=True, max_length=255, verbose_name="title"
-                    ),
+                    models.CharField(db_index=True, max_length=255, verbose_name="title"),
                 ),
                 ("content", models.TextField(verbose_name="content")),
                 (
                     "featured_image",
-                    models.ImageField(
-                        upload_to="images", verbose_name="featured image"
-                    ),
+                    models.ImageField(upload_to="images", verbose_name="featured image"),
                 ),
                 (
                     "created_at",

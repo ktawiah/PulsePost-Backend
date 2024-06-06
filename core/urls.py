@@ -24,10 +24,8 @@ from .schema import schema_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path(
-        "api/auth/",
-        include("apps.accounts.api.urls"),
-    ),
+    path("api/auth/", include("apps.accounts.api.urls")),
+    path("api/posts/", include("apps.posts.api.urls")),
     path(
         "",
         schema_view.with_ui("swagger", cache_timeout=0),

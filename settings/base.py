@@ -102,11 +102,11 @@ class Base(Configuration):
     DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
     REST_FRAMEWORK = {
-        "DEFAULT_AUTHENTICATION_CLASSES": (
+        "DEFAULT_AUTHENTICATION_CLASSES": [
             "apps.accounts.authentication.CustomJWTAuthentication",
-        ),
+        ],
         "DEFAULT_PERMISSION_CLASSES": [
-            "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+            "rest_framework.permissions.IsAuthenticated",
         ],
         "DEFAULT_RENDERER_CLASSES": [
             "rest_framework.renderers.JSONRenderer",
@@ -114,7 +114,7 @@ class Base(Configuration):
         ],
     }
 
-    AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5
+    AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 60
     AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24
     AUTH_COOKIE_SAMESITE = None
     AUTH_COOKIE_HTTPONLY = True
@@ -128,7 +128,7 @@ class Base(Configuration):
     )
 
     SIMPLE_JWT = {
-        "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+        "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
         "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
         "AUTH_HEADER_TYPES": ("Bearer",),
         "ALGORITHM": "HS256",
@@ -149,9 +149,7 @@ class Base(Configuration):
         "TOKEN_MODEL": None,
         "SET_PASSWORD_RETYPE": True,
         "PASSWORD_RESET_CONFIRM_RETYPE": True,
-        "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": config(
-            "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS"
-        ).split(","),
+        "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": config("SOCIAL_AUTH_ALLOWED_REDIRECT_URIS").split(","),
     }
 
     AUTHENTICATION_BACKENDS = (
