@@ -5,3 +5,6 @@ class AccountsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "apps.accounts"
     label = "user_accounts"
+
+    def ready(self):
+        import apps.accounts.extensions  # noqa

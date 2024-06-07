@@ -9,9 +9,6 @@ from .views import (
     LogoutView,
 )
 
-# from djoser.views import UserViewSet
-
-
 urlpatterns = [
     path(
         "activate/",
