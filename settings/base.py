@@ -18,7 +18,8 @@ class Base(Configuration):
         "djoser",
         "social_django",
         "corsheaders",
-        "drf_yasg",
+        # "drf_yasg",
+        "drf_spectacular",
         "jazzmin",
     ]
 
@@ -112,6 +113,7 @@ class Base(Configuration):
             "rest_framework.renderers.JSONRenderer",
             "rest_framework.renderers.BrowsableAPIRenderer",
         ],
+        "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     }
 
     AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 60
@@ -178,12 +180,14 @@ class Base(Configuration):
     SENDGRID_API_KEY = config("SENDGRID_API_KEY")
     SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
-    SWAGGER_SETTINGS = {
-        "SECURITY_DEFINITIONS": {
-            "Bearer": {
-                "type": "apiKey",
-                "name": "Authorization",
-                "in": "header",
-            },
+    SPECTACULAR_SETTINGS = {
+        "TITLE": "PulsePost API",
+        "DESCRIPTION": "PulsePost REST API Documentation.",
+        "VERSION": "1.0.0",
+        "SERVE_INCLUDE_SCHEMA": False,
+        "CONTACT": {
+            "name": "Kelvin Tawiah",
+            "email": "kelvintawiah224@gmail.com",
+            "url": "https://kelvintawiahdev.vercel.app",
         },
     }

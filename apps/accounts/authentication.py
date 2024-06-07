@@ -5,12 +5,12 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 def enforce_csrf(request: Request):
-    def dummy_get_response(
+    def get_response_callback(
         request,
-    ):  # pragma: no cover
+    ):
         return None
 
-    check = CSRFCheck(dummy_get_response)
+    check = CSRFCheck(get_response_callback)
     check.process_request(request)
     reason = check.process_view(request, None, (), {})
     if reason:

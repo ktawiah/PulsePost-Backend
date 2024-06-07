@@ -87,6 +87,8 @@ class CustomTokenVerifyView(TokenVerifyView):
 
 
 class LogoutView(APIView):
+    serializer_class = None
+
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = Response(status=status.HTTP_204_NO_CONTENT)
 
