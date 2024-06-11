@@ -21,16 +21,3 @@ class PostSerializer(serializers.ModelSerializer):
             "status",
             "likes",
         ]
-
-
-class PostCreateSerializer(serializers.ModelSerializer):
-    """Serializer definition for the Post model."""
-
-    class Meta:
-        model = Post
-        fields = [
-            "user",
-            "title",
-            "content",
-            "status",
-        ]

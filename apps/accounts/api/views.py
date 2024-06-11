@@ -1,5 +1,5 @@
 from djoser.social.views import ProviderAuthView
-from djoser.views import UserViewSet
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -8,17 +8,12 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from settings.base import Base
 
-from ..renderers import AccountsRenderer
-from .serializers import CustomTokenObtainPairSerializer
+from .serializers import CustomTokenObtainPairSerializer, CustomUserSerializer
 
 
-class CustomUserViewSet(UserViewSet):
-    renderer_classes = [AccountsRenderer]
-
-
+@extend_schema(responses=CustomUserSerializer)
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
-    renderer_classes = [AccountsRenderer]
 
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = super().post(request, *args, **kwargs)
@@ -86,6 +81,7 @@ class CustomTokenVerifyView(TokenVerifyView):
         return response
 
 
+@extend_schema(responses={204: None})
 class LogoutView(APIView):
     serializer_class = None
 

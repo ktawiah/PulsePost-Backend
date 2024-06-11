@@ -1,39 +1,39 @@
 from django.urls import path
+from djoser.views import UserViewSet
 
 from .views import (
     CustomProviderAuthView,
     CustomTokenObtainPairView,
     CustomTokenRefreshView,
     CustomTokenVerifyView,
-    CustomUserViewSet,
     LogoutView,
 )
 
 urlpatterns = [
     path(
         "activate/",
-        CustomUserViewSet.as_view({"post": "activation"}),
+        UserViewSet.as_view({"post": "activation"}),
         name="account_activate",
     ),
-    path("users/", CustomUserViewSet.as_view({"get": "list"}), name="users_list"),
+    path("users/", UserViewSet.as_view({"get": "list"}), name="users_list"),
     path(
         "users/me/",
-        CustomUserViewSet.as_view({"get": "me"}),
+        UserViewSet.as_view({"get": "me"}),
         name="user_detail",
     ),
     path(
         "register/",
-        CustomUserViewSet.as_view({"post": "create"}),
+        UserViewSet.as_view({"post": "create"}),
         name="account_register",
     ),
     path(
         "reset-password/",
-        CustomUserViewSet.as_view({"post": "reset_password"}),
+        UserViewSet.as_view({"post": "reset_password"}),
         name="reset_password",
     ),
     path(
         "reset-password/confirm/",
-        CustomUserViewSet.as_view({"post": "reset_password_confirm"}),
+        UserViewSet.as_view({"post": "reset_password_confirm"}),
         name="reset_password_confirm",
     ),
     path(

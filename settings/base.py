@@ -18,7 +18,6 @@ class Base(Configuration):
         "djoser",
         "social_django",
         "corsheaders",
-        # "drf_yasg",
         "drf_spectacular",
         "jazzmin",
     ]
@@ -107,7 +106,7 @@ class Base(Configuration):
             "apps.accounts.authentication.CustomJWTAuthentication",
         ],
         "DEFAULT_PERMISSION_CLASSES": [
-            "rest_framework.permissions.IsAuthenticated",
+            "rest_framework.permissions.AllowAny",
         ],
         "DEFAULT_RENDERER_CLASSES": [
             "rest_framework.renderers.JSONRenderer",
@@ -183,11 +182,16 @@ class Base(Configuration):
     SPECTACULAR_SETTINGS = {
         "TITLE": "PulsePost API",
         "DESCRIPTION": "PulsePost REST API Documentation.",
-        "VERSION": "1.0.0",
+        "VERSION": "v1",
         "SERVE_INCLUDE_SCHEMA": False,
         "CONTACT": {
             "name": "Kelvin Tawiah",
             "email": "kelvintawiah224@gmail.com",
             "url": "https://kelvintawiahdev.vercel.app",
+        },
+        "SWAGGER_UI_SETTINGS": {
+            "deepLinking": True,
+            "persistAuthorization": True,
+            # "displayOperationId": True,
         },
     }
