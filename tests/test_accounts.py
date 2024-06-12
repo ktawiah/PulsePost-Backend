@@ -78,7 +78,6 @@ def test_refresh_success(api_client, create_user):
     url = reverse("account_refresh")
     user = create_user()
     refresh_token = RefreshToken.for_user(user)
-    print(str(refresh_token))
     response = api_client.post(
         path=url,
         data={

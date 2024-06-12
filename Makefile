@@ -10,6 +10,10 @@ makemigrations:
 migrate:
 	poetry run python manage.py migrate
 
+.PHONY: shell
+shell:
+	poetry run python manage.py shell
+
 .PHONY: superuser
 superuser:
 	poetry run python manage.py createsuperuser

@@ -19,6 +19,6 @@ post_detail = PostViewSet.as_view(
 )
 
 urlpatterns = [
-    path("posts/", post_list, name="post-list"),
-    path("posts/<int:pk>/", post_detail, name="post-detail"),
+    path("", post_list, name="post_list"),
+    path("<str:pk>/", post_detail, name="post_detail"),
 ]

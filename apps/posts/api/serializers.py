@@ -6,7 +6,7 @@ from apps.posts.models import Post
 class PostSerializer(serializers.ModelSerializer):
     """Serializer definition for the Post model."""
 
-    url = serializers.HyperlinkedIdentityField(view_name="post-detail", lookup_field="pk", read_only=True)
+    url = serializers.HyperlinkedIdentityField(view_name="post_detail", lookup_field="pk", read_only=True)
 
     class Meta:
         model = Post
