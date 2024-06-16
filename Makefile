@@ -37,3 +37,7 @@ install-precommit:
 .PHONY: lint
 lint:
 	poetry run pre-commit run --all-files
+
+.PHONY: docker-up
+docker-up:
+	docker compose up

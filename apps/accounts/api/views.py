@@ -16,6 +16,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
     def post(self, request: Request, *args, **kwargs) -> Response:
+        print(request.data)
         response = super().post(request, *args, **kwargs)
 
         if response.status_code == status.HTTP_200_OK:

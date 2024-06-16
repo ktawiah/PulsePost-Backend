@@ -195,3 +195,5 @@ class Base(Configuration):
             # "displayOperationId": True,
         },
     }
+
+    CORS_ALLOW_CREDENTIALS = True

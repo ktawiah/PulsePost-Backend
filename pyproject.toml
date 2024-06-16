@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "core-app-rest-api"
+name = "core"
 version = "0.1.0"
 description = ""
 authors = ["kelly <kelvintawiah224@gmail.com>"]
@@ -21,6 +21,7 @@ django-jazzmin = "^3.0.0"
 python-decouple = "^3.8"
 django-configurations = "^2.5.1"
 drf-spectacular = "^0.27.2"
+psycopg2-binary = "^2.9.9"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -30,6 +31,7 @@ pytest-django = "^4.8.0"
 pytest-xdist = "^3.6.1"
 pre-commit = "^3.7.1"
 pyproject-flake8 = "^7.0.0"
+coverage = "^7.5.3"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "settings"
