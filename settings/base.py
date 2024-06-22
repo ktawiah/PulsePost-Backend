@@ -175,8 +175,8 @@ class Base(Configuration):
     ]
 
     EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
     SENDGRID_API_KEY = config("SENDGRID_API_KEY")
+    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
     SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
     SPECTACULAR_SETTINGS = {
@@ -195,5 +195,8 @@ class Base(Configuration):
             # "displayOperationId": True,
         },
     }
-
     CORS_ALLOW_CREDENTIALS = True
+
+    DOMAIN = config("DOMAIN")
+
+    SITE_NAME = config("SITE_NAME")

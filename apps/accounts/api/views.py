@@ -16,7 +16,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
     def post(self, request: Request, *args, **kwargs) -> Response:
-        print(request.data)
         response = super().post(request, *args, **kwargs)
 
         if response.status_code == status.HTTP_200_OK:
@@ -100,10 +99,9 @@ class CustomProviderAuthView(ProviderAuthView):
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = super().post(request, *args, **kwargs)
 
-        if response.status_code == status.HTTP_200_OK:
+        if response.status_code == status.HTTP_201_CREATED:
             access_token = response.data.get("access")
             refresh_token = response.data.get("refresh")
-
         response.set_cookie(
             key="access",
             value=access_token,
