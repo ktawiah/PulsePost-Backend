@@ -1,8 +1,9 @@
 # PulsePost App Backend
 
-##### <b>`Under Construction 🔨`</b>
+<!-- ##### <b>`Under Construction 🔨`</b> -->
 
 This project is the backend for PulsePost, a blog app designed to provide a seamless and intuitive platform for users to publish and share their thoughts, articles, and experiences with a wide audience. It aims to offer features such as customizable user profiles, a robust content management system, social sharing capabilities, and analytics to help bloggers track their impact and engagement.
+Click here 👉 for Frontend App ~ [PulsePost Frontend](https://github.com/ktawiah/PulsePost-Frontend/)
 
 ## Table of Contents
 
